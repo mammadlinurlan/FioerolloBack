@@ -26,7 +26,8 @@ namespace FioreolloBack.Controllers
             HomeVM homeVM = new HomeVM
             {
                 Experts=_context.Experts.Include(e=>e.Speciality).ToList(),
-                 Settings=_context.Settings.ToList()
+                 Settings=_context.Settings.ToList(),
+                  Flowers=_context.Flowers.Include(f=>f.FlowerImages).Include(f=>f.FlowerCategories).ThenInclude(f=>f.Category).Include(f=>f.Campaign).ToList()
             };
 
             return View(homeVM);

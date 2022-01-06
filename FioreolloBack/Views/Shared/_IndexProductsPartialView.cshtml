@@ -1,0 +1,38 @@
+﻿@foreach (Flower flower in Model.Flowers)
+{
+    <div data-aos-offset="100"
+         class="product col-lg-3 col-md-6 popular @foreach (var flowerCategory in flower.FlowerCategories)
+                 {
+                   @(flowerCategory.Category.Name.ToLower()+" ")
+                 } all">
+        <div class="productImage">
+            @foreach (FlowerImage flowerImage in flower.FlowerImages)
+            {
+                <img src="@flowerImage.Image" alt="">
+            }
+
+
+        </div>
+        <div class="productTitle">
+            <p>@flower.Name</p>
+        </div>
+        @if (flower.CampaignId == null)
+        {
+            <div class="productPrice">
+                <span class="addToCardBtn" data-id="1">Add to cart</span><span>$</span><span>@flower.Price</span>
+            </div>
+        }
+        else
+        {
+            <div class="productPrice">
+                <span class="addToCardBtn" data-id="5">Add to cart</span> <span style="text-decoration: line-through;">$@flower.Price</span>
+                <span>$</span><span>@(flower.Price * flower.Campaign.DiscountPercentage / 100)</span>
+            </div>
+        }
+
+        <div class="addToCart">
+
+        </div>
+
+    </div>
+}

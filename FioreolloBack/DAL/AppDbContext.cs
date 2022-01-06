@@ -19,5 +19,15 @@ namespace FioreolloBack.DAL
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<Flower> Flowers { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<FlowerCategory> FlowerCategories { get; set; }
+
+        public DbSet<Campaign> Campaigns { get; set; }
+
+        public DbSet<FlowerImage> FlowerImages { get; set; }
+
     }
 }
