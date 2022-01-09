@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject FioreolloBack.Services.LayoutServices layoutService
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -35,7 +37,7 @@
                     <div class="nav-left logo col-lg-2 col-md-4 col-8">
                         <a href="">
                             <img style="width: 100%;"
-                                 src="https://fiorello.qodeinteractive.com/wp-content/uploads/2018/05/h2-logo-1.png"
+                                 src="@layoutService.getSettingDatas().Logo"
                                  alt="">
                         </a>
                     </div>
@@ -328,14 +330,14 @@
 
                             </div>
                             <div class="search-icon">
-                                <i class="fas fa-search"></i>
+                                @Html.Raw(layoutService.getSettingDatas().SearchIcon)
                                 <input type="search" placeholder="Search...">
                             </div>
 
                             <div class="shopping" style="
                                     height: 97.52px; align-items: center;">
                                 <div class="shop-icon">
-                                    <i class="fas fa-shopping-bag"></i>
+                                    @Html.Raw(layoutService.getSettingDatas().BasketIcon)
                                     <div class="bag-count">
                                         <p>0</p>
                                     </div>
@@ -648,7 +650,7 @@
                     <div class="nav-left logo col-lg-2 col-md-4 col-10">
                         <a href="">
                             <img style="width: 100%;"
-                                 src="https://fiorello.qodeinteractive.com/wp-content/uploads/2018/05/h2-logo-1.png"
+                                 src="@layoutService.getSettingDatas().Logo"
                                  alt="">
                         </a>
                     </div>
@@ -989,10 +991,10 @@
                     </div>
                     <div class="socialmedia col-lg-4 col-md-12 col-12">
                         <div class="insta">
-                            <a href="">INSTAGRAM</a>
+                            <a href="@layoutService.getSettingDatas().InstaURL">INSTAGRAM</a>
                         </div>
                         <div class="face">
-                            <a href="">FACEBOOK</a>
+                            <a href="@layoutService.getSettingDatas().FaceUrl">FACEBOOK</a>
                         </div>
                     </div>
                 </div>
@@ -1017,6 +1019,7 @@
     <script src="~/assets/js/owl.carousel.min.js"></script>
     <script src="~/assets/js/main.js"></script>
     <script src="~/assets/js/homepage.js"></script>
+    @RenderSection("Scripts",false)
 
 </body>
 

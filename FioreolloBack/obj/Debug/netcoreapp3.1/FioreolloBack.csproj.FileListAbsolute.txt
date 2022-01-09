@@ -149,3 +149,4 @@ C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\bin\Debug\netcoreapp3.
 C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_IndexProductsPartialView.cshtml.g.cs
+C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Views\Flower\Details.cshtml.g.cs

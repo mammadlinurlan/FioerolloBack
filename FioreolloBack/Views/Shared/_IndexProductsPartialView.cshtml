@@ -1,12 +1,16 @@
 ﻿@foreach (Flower flower in Model.Flowers)
 {
-    <div data-aos-offset="100"
+
+    <a  asp-controller="Flower" asp-action="Details" asp-route-id="@flower.Id" data-aos-offset="100"
          class="product col-lg-3 col-md-6 popular @foreach (var flowerCategory in flower.FlowerCategories)
                  {
                    @(flowerCategory.Category.Name.ToLower()+" ")
                  } all">
+
+        <div>
+
         <div class="productImage">
-            @foreach (FlowerImage flowerImage in flower.FlowerImages)
+            @foreach (FlowerImage flowerImage in flower.FlowerImages.Where(i=>i.IsMain==true))
             {
                 <img src="@flowerImage.Image" alt="">
             }
@@ -34,5 +38,10 @@
 
         </div>
 
-    </div>
+
+
+            </div>
+    </a>
+
+   
 }

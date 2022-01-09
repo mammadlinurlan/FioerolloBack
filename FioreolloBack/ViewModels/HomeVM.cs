@@ -12,7 +12,7 @@ namespace FioreolloBack.ViewModels
 
         public List<Expert> Experts { get; set; }
 
-        public List<Setting> Settings { get; set; }
+        public Setting Settings { get; set; }
 
         public List<Flower> Flowers { get; set; }
     }
