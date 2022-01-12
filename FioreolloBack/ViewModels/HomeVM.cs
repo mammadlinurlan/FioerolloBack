@@ -14,6 +14,7 @@ namespace FioreolloBack.ViewModels
 
         public Setting Settings { get; set; }
 
+        public List<Category> Categories { get; set; }
         public List<Flower> Flowers { get; set; }
     }
 }

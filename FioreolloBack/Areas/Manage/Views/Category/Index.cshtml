@@ -1,0 +1,44 @@
+﻿@model List<Category>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container">
+
+    <div class="d-flex justify-content-end">
+        <a asp-controller="Category" asp-action="Create" class="btn btn-primary btn-icon-text">
+            <i class="mdi mdi-upload btn-icon-prepend"></i> CREATE
+        </a>
+    </div>
+
+   
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Category name</th>
+                <th scope="col">Count</th>
+                <th scope="col">Settings</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Category item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.Id</th>
+                    <td>@item.Name</td>
+                    <td>@item.FlowerCategories.Count()</td>
+                    <td><a asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-icon-text">
+    <i class="mdi mdi-file-check btn-icon-append"></i>
+    Edit
+</a></td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+

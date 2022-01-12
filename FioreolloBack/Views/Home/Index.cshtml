@@ -58,12 +58,11 @@
                     </div>
                     <div class="filters col-lg-10  ">
                         <span id="firstfilter" data-id="all">ALL</span>
-                        <span data-id="popular" style="margin-left: 20px;">POPULAR</span>
-                        <span data-id="winter" style="margin-left: 20px;">WINTER</span>
-                        <span data-id="various" style="margin-left: 20px;">VARIOUS</span>
-                        <span data-id="exotic" style="margin-left: 20px;">EXOTIC</span>
-                        <span data-id="greens" style="margin-left: 20px;">GREENS</span>
-                        <span data-id="cactuses" style="margin-left: 20px;">CACTUSES</span>
+                        @foreach (Category category in Model.Categories)
+                        {
+                    <span data-id="@category.Name.ToLower()" style="margin-left: 20px;">@category.Name.ToUpper()</span>
+                          
+                        }
 
                     </div>
                     <div class="filterbtn col-lg-2 d-flex justify-content-end">
