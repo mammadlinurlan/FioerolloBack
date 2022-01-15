@@ -29,5 +29,7 @@ namespace FioreolloBack.DAL
 
         public DbSet<FlowerImage> FlowerImages { get; set; }
 
+        public DbSet<Slider> Sliders { get; set; }
+
     }
 }

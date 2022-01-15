@@ -158,3 +158,5 @@ C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.
 C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Category\Index.cshtml.g.cs
 C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Category\Create.cshtml.g.cs
 C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Category\Edit.cshtml.g.cs
+C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Slider\Index.cshtml.g.cs
+C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Slider\Create.cshtml.g.cs
