@@ -9,14 +9,24 @@
 
         <div>
 
-        <div class="productImage">
-            @foreach (FlowerImage flowerImage in flower.FlowerImages.Where(i=>i.IsMain==true))
-            {
-                <img src="@flowerImage.Image" alt="">
-            }
+            <div class="productImage">
+                @foreach (FlowerImage flowerImage in flower.FlowerImages.Where(i => i.IsMain == true))
+                {
+                    if (@flowerImage.Image.Contains("https://"))
+                    {
+                        <img src="@flowerImage.Image" alt="">
+                    }
+                    else
+                    {
+                        <img src="/assets/images/@flowerImage.Image" alt="">
+                    }
 
 
-        </div>
+
+                }
+
+
+            </div>
         <div class="productTitle">
             <p>@flower.Name</p>
         </div>
@@ -30,7 +40,7 @@
         {
             <div class="productPrice">
                 <span class="addToCardBtn" data-id="5">Add to cart</span> <span style="text-decoration: line-through;">$@flower.Price</span>
-                <span>$</span><span>@(flower.Price * flower.Campaign.DiscountPercentage / 100)</span>
+                <span>$</span><span>@(flower.Price * (100 - flower.Campaign.DiscountPercentage) / 100 )</span>
             </div>
         }
 
