@@ -102,5 +102,112 @@ namespace FioreolloBack.Areas.Manage.Controllers
             return RedirectToAction(nameof(Index));
 
         }
+
+
+        public IActionResult Edit(int id)
+        {
+
+            ViewBag.Campaigns = _context.Campaigns.ToList();
+            ViewBag.Categories = _context.Categories.ToList();
+            Flower flower = _context.Flowers.Include(f => f.FlowerCategories).Include(f => f.FlowerImages).FirstOrDefault(f => f.Id == id);
+
+            return View(flower);
+        }
+
+        public IActionResult Edit(Flower flower)
+        {
+
+            ViewBag.Campaigns = _context.Campaigns.ToList();
+            ViewBag.Categories = _context.Categories.ToList();
+            Flower existedFlower = _context.Flowers.Include(f => f.FlowerCategories).Include(f => f.FlowerImages).FirstOrDefault(f => f.Id == flower.Id);
+
+            if (!ModelState.IsValid) return View();
+
+            if(existedFlower == null)
+            {
+                return NotFound();
+            }
+
+            if(flower.ImageFiles != null)
+            {
+                foreach (var item in flower.ImageFiles)
+                {
+                    if (!item.IsImage())
+                    {
+                        ModelState.AddModelError("ImageFiles", "must be image");
+                        return View(existedFlower);
+
+                    }
+                    if (item.IsSizeOkay(2))
+                    {
+                        ModelState.AddModelError("ImageFiles", "must be less than 2mb");
+                        return View(existedFlower);
+
+                    }
+                }
+
+                List<FlowerImage> removableImages = existedFlower.FlowerImages.Where(f => !flower.ImageIds.Contains(f.Id)).ToList();
+                existedFlower.FlowerImages.RemoveAll(f => removableImages.Any(ri => ri.Id == f.Id));
+                foreach (var item in removableImages)
+                {
+                    Helpers.Helper.DeleteImg(_env.WebRootPath, "assets/images", item.Image);
+                }
+
+                foreach (var item in flower.ImageFiles)
+                {
+                    FlowerImage flowerImage = new FlowerImage
+                    {
+                        FlowerId = existedFlower.Id,
+                        IsMain = false,
+                        Image = item.SaveImg(_env.WebRootPath, "assets/images")
+                    };
+                    existedFlower.FlowerImages.Add(flowerImage);
+                }
+
+                List<FlowerCategory> removableCategories = existedFlower.FlowerCategories.Where(fc => !flower.CategoryIds.Contains(fc.Id)).ToList();
+                existedFlower.FlowerCategories.RemoveAll(f => removableCategories.Any(rc => rc.Id == f.Id));
+
+                foreach (var categoryId in flower.CategoryIds)
+                {
+                    FlowerCategory flowerCategory = existedFlower.FlowerCategories.FirstOrDefault(f => f.CategoryId == categoryId);
+                    if(flowerCategory == null)
+                    {
+                        FlowerCategory flowerCategory1 = new FlowerCategory
+                        {
+                            CategoryId = categoryId,
+                            FlowerId = existedFlower.Id
+
+                        };
+                        existedFlower.FlowerCategories.Add(flowerCategory1);
+                    }
+                }
+            }
+
+
+            existedFlower.Name = flower.Name;
+            existedFlower.Price = flower.Price;
+
+            existedFlower.Code = flower.Code;
+            existedFlower.Desc = flower.Desc;
+            existedFlower.Dimensions = flower.Dimensions;
+            existedFlower.Weight = flower.Weight;
+            existedFlower.InStock = flower.InStock;
+           if(flower.CampaignId == 0)
+            {
+                flower.Campaign = null;
+            }
+
+            existedFlower.Campaign = flower.Campaign;
+
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+
+
+
+
+
+
+
+        }
     }
 }

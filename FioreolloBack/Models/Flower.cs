@@ -47,6 +47,8 @@ namespace FioreolloBack.Models
         [NotMapped]
         public List<IFormFile> ImageFiles { get; set; }
 
+        [NotMapped]
+        public List<int> ImageIds { get; set; }
 
     }
 }
