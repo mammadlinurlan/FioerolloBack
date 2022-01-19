@@ -163,3 +163,12 @@ C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.
 C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Flower\Index.cshtml.g.cs
 C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Flower\Create.cshtml.g.cs
 C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Flower\Edit.cshtml.g.cs
+C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
+C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Account\Login.cshtml.g.cs
+C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Views\Account\Edit.cshtml.g.cs
