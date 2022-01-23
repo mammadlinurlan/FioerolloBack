@@ -32,5 +32,7 @@ namespace FioreolloBack.DAL
 
         public DbSet<Slider> Sliders { get; set; }
 
+        public DbSet<Comment> Comments { get; set; }
+
     }
 }

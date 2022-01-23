@@ -108,7 +108,6 @@ namespace FioreolloBack.Controllers
         }
 
 
-
         [Authorize]
         public async Task<IActionResult> Edit()
         {
@@ -124,6 +123,7 @@ namespace FioreolloBack.Controllers
             return View(editedUser);
 
         }
+
 
         [Authorize]
         [HttpPost]
@@ -177,7 +177,8 @@ namespace FioreolloBack.Controllers
 
 
             }
-            await _signInManager.PasswordSignInAsync(user, editUser.Password, true, true);
+            //await _signInManager.PasswordSignInAsync(user, editUser.Password, true, true);
+            await _signInManager.SignInAsync(user,true);
 
             return RedirectToAction("Index", "Home");
 

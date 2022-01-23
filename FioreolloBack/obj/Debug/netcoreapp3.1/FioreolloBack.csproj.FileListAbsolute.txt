@@ -172,3 +172,4 @@ C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.
 C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Account\Login.cshtml.g.cs
 C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Views\Account\Edit.cshtml.g.cs
+C:\Users\MACBOOK\source\repos\FioreolloBack\FioreolloBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Flower\Comments.cshtml.g.cs

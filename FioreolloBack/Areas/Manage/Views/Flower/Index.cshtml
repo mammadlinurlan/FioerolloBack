@@ -53,16 +53,20 @@
 
 
 
-                <td>
-                    <a asp-controller="flower" asp-action="Edit" asp-route-id="@flower.Id" class="btn btn-warning btn-icon-text">
-                        <i class="mdi mdi-file-check btn-icon-append"></i>
-                        Edit
-                    </a>
-                    <a asp-controller="flower" asp-action="delete" asp-route-id="@flower.Id" class="btn btn-danger btn-icon-text delete-item">
-                        <i class="mdi mdi-alert btn-icon-prepend"></i>
-                        Delete
-                    </a>
-                </td>
+            <td>
+                <a asp-controller="flower" asp-action="Edit" asp-route-id="@flower.Id" class="btn btn-warning btn-icon-text">
+                    <i class="mdi mdi-file-check btn-icon-append"></i>
+                    Edit
+                </a>
+                <a asp-controller="flower" asp-action="delete" asp-route-id="@flower.Id" class="btn btn-danger btn-icon-text delete-item">
+                    <i class="mdi mdi-alert btn-icon-prepend"></i>
+                    Delete
+                </a>
+                <a asp-controller="flower" asp-action="comments" asp-route-Flowerid="@flower.Id" class="btn btn-info btn-icon-text delete-item">
+                    <i class="mdi mdi-alert btn-icon-prepend"></i>
+                    Comments(@flower.Comments.Count)
+                </a>
+            </td>
             </tr>
             }
 

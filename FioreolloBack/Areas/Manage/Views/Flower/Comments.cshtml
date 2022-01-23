@@ -1,0 +1,68 @@
+﻿@model List<Comment>
+@{
+    ViewData["Title"] = "Comments";
+}
+
+<div class="container">
+
+    <div class="mt-2 d-flex" style="justify-content:flex-end">
+        <a asp-controller="flower" asp-action="Create" class="btn btn-primary btn-icon-text">
+            <i class="mdi mdi-upload btn-icon-prepend"></i> CREATE
+        </a>
+    </div>
+
+
+    <table class="table table-dark mt-3">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">FullName</th>
+                <th scope="col">Text</th>
+                <th scope="col">CreatedTime</th>
+                <th scope="col">Status</th>
+                <th scope="col">Settings</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            
+                @foreach (Comment comment in Model)
+                {
+            <tr>
+                <th scope="row">@comment.Id</th>
+                <td>@comment.AppUser.Fullname</td>
+                <td>@comment.Text</td>
+                <td>@comment.CreatedTime</td>
+                <td>@comment.IsAcces</td>
+                @if (comment.IsAcces == true)
+                {
+                    <td>
+                        <a asp-controller="flower" asp-action="CommentStatus" asp-route-id="@comment.Id" class="btn btn-danger btn-icon-text">
+                            <i class="mdi mdi-alert btn-icon-prepend"></i>
+                            Reject
+                        </a>
+                    </td>
+
+                }
+                else
+                {
+                    <td>
+                        <a asp-controller="flower" asp-action="CommentStatus" asp-route-id="@comment.Id" class="btn btn-success btn-icon-text">
+                            <i class="mdi mdi-file-check btn-icon-append"></i>
+                            Accept
+                        </a>
+                    </td>
+                }
+
+
+            </tr>
+
+               
+                }
+            
+
+        </tbody>
+    </table>
+</div>
+

@@ -25,7 +25,7 @@ namespace FioreolloBack.Areas.Manage.Controllers
         }
         public IActionResult Index()
         {
-            List<Flower> flowers = _context.Flowers.Include(f => f.FlowerImages).ToList();
+            List<Flower> flowers = _context.Flowers.Include(f => f.FlowerImages).Include(f=>f.Comments).ToList();
             return View(flowers);
         }
 
@@ -207,6 +207,34 @@ namespace FioreolloBack.Areas.Manage.Controllers
 
 
 
+
+        }
+
+        public IActionResult Comments(int Flowerid)
+        {
+            if(!_context.Comments.Any(c=>c.FlowerId == Flowerid))
+            {
+                return RedirectToAction("Index", "Flower");
+            }
+
+            List<Comment> comments = _context.Comments.Where(c => c.FlowerId == Flowerid).Include(c=>c.AppUser).ToList();
+
+
+            return View(comments);
+        }
+
+        public IActionResult CommentStatus(int id)
+        {
+            if (!_context.Comments.Any(c => c.Id == id))
+            {
+                return RedirectToAction("Index", "Flower");
+            }
+
+            Comment comment = _context.Comments.FirstOrDefault(c => c.Id == id);
+            comment.IsAcces = comment.IsAcces ? false : true;
+            _context.SaveChanges();
+
+            return RedirectToAction("Comments", "Flower", new { Flowerid = comment.FlowerId });
 
         }
     }

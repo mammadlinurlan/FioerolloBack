@@ -50,5 +50,7 @@ namespace FioreolloBack.Models
         [NotMapped]
         public List<int> ImageIds { get; set; }
 
+        public List<Comment> Comments { get; set; }
+
     }
 }
