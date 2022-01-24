@@ -1,8 +1,10 @@
-﻿using FioreolloBack.Models;
+﻿using FioreolloBack.DAL;
+using FioreolloBack.Models;
 using FioreolloBack.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,20 +13,22 @@ using System.Threading.Tasks;
 namespace FioreolloBack.Areas.Manage.Controllers
 {
     [Area("Manage")]
-    
+
     public class AccountController : Controller
     {
-       
+
 
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,RoleManager<IdentityRole> roleManager)
+        private readonly AppDbContext _context;
+        public AccountController(AppDbContext context,UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _context = context;
+
         }
         public IActionResult Login()
         {
@@ -67,6 +71,46 @@ namespace FioreolloBack.Areas.Manage.Controllers
 
         }
 
+        [Authorize(Roles ="SuperAdmin")]
+        public IActionResult UserList()
+        {
+            
+            List<AppUser> users = _userManager.Users.ToList();
+           
+            return View(users);
+        }
+        [Authorize(Roles = "SuperAdmin")]
+
+        public async Task<IActionResult> AdminStatus(string id)
+        {
+            AppUser user = await _userManager.FindByIdAsync(id);
+            if (!ModelState.IsValid) return RedirectToAction("UserList", "Account");
+            if (user == null)
+            {
+                return NotFound();
+            }
+            if (await _userManager.IsInRoleAsync(user, "SuperAdmin") == true)
+            {
+                return Content("you cannot touch superadmin!");
+            }
+
+
+            if (!user.IsAdmin == true)
+            {
+                await _userManager.AddToRoleAsync(user, "Admin");
+                user.IsAdmin = true;
+            }
+            else
+            {
+                await _userManager.RemoveFromRoleAsync(user, "Admin");
+                user.IsAdmin = false;
+            }
+
+
+          await  _context.SaveChangesAsync();
+            return RedirectToAction("UserList", "Account");
+        }
+
         //public async Task<IActionResult> Logout()
         //{
         //  await  _signInManager.SignOutAsync();
@@ -94,7 +138,7 @@ namespace FioreolloBack.Areas.Manage.Controllers
         //    };
         //    await _userManager.CreateAsync(user, "nurlan123");
         //    await _userManager.AddToRoleAsync(user, "SuperAdmin");
-            
+
         //}
 
 
