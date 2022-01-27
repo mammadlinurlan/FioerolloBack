@@ -1,7 +1,7 @@
 ﻿@foreach (Flower flower in Model.Flowers)
 {
 
-    <a  asp-controller="Flower" asp-action="Details" asp-route-id="@flower.Id" data-aos-offset="100"
+    <div data-aos-offset="100"
          class="product col-lg-3 col-md-6 popular @foreach (var flowerCategory in flower.FlowerCategories)
                  {
                    @(flowerCategory.Category.Name.ToLower()+" ")
@@ -14,11 +14,13 @@
                 {
                     if (@flowerImage.Image.Contains("https://"))
                     {
-                        <img src="@flowerImage.Image" alt="">
+                        <a  asp-controller = "Flower" asp-action = "Details" asp-route-id = "@flower.Id"><img src="@flowerImage.Image" alt=""></a>
+                       
                     }
                     else
                     {
-                        <img src="/assets/images/@flowerImage.Image" alt="">
+            <a asp-controller="Flower" asp-action="Details" asp-route-id="@flower.Id"><img src="/assets/images/@flowerImage.Image" alt=""></a>
+                        
                     }
 
 
@@ -45,13 +47,13 @@
         }
 
         <div class="addToCart">
-
+            <a style="position:relative;z-index:10000" asp-controller="flower" asp-action="setbasket" asp-route-id="@flower.Id">Buy</a>
         </div>
 
 
 
             </div>
-    </a>
+    </div>
 
    
 }

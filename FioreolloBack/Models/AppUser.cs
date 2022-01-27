@@ -11,5 +11,6 @@ namespace FioreolloBack.Models
         public string Fullname { get; set; }
         public bool IsAdmin { get; set; }
 
+        public List<BasketItem> BasketItems { get; set; }
     }
 }

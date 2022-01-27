@@ -34,5 +34,7 @@ namespace FioreolloBack.DAL
 
         public DbSet<Comment> Comments { get; set; }
 
+        public DbSet<BasketItem> BasketItems { get; set; }
+
     }
 }

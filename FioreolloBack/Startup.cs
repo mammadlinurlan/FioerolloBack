@@ -1,6 +1,7 @@
 using FioreolloBack.DAL;
-using FioreolloBack.Models;
 using FioreolloBack.Services;
+using FioreolloBack.Models;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,6 +39,8 @@ namespace FioreolloBack
             services.AddScoped<LayoutServices>();
 
             services.AddHttpContextAccessor();
+
+            
 
             services.AddIdentity<AppUser, IdentityRole>(option =>
             {

@@ -91,7 +91,7 @@
                             </ul>
                         </div>
                         <div class="search-shopping col-lg-3">
-                            <div style="position: absolute;top: 100%;opacity: 0%;transition: 0.3s;" class="alert alert-danger d-flex align-items-center basketAlert" role="alert">
+                            @*<div style="position: absolute;top: 100%;opacity: 0%;transition: 0.3s;" class="alert alert-danger d-flex align-items-center basketAlert" role="alert">
                                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill" /></svg>
                                 <div>
                                     Your basket is empty!
@@ -122,7 +122,7 @@
                                     </div>
                                 </div>
 
-                            </div>
+                            </div>*@
                             <div class="search-icon">
                                 @Html.Raw(layoutService.getSettingDatas().SearchIcon)
                                 <input type="search" placeholder="Search...">
@@ -133,16 +133,48 @@
                                 <div class="shop-icon">
                                     @Html.Raw(layoutService.getSettingDatas().BasketIcon)
                                     <div class="bag-count">
-                                        <p>0</p>
+                                        <p>@layoutService.ShowBasket().Result.Count</p>
                                     </div>
                                 </div>
                                 <div class="shop-basket">
-                                    <span>CART</span><span>($</span><span>0</span><span>)</span>
+                                    <span>CART</span><span>($</span><span>@layoutService.ShowBasket().Result.TotalPrice</span><span>)</span>
                                 </div>
-                                <!-- <div class="basketList">
-                                    <div class="listProducts">
+                                 <div style="width:220px" class="basketList">
+                                     <div  class="listProducts">
+                                         @foreach (var item in layoutService.ShowBasket().Result.BasketItems)
+                                         {
+                                             <div class="product">
+                                                 <div class="image">
+                                                     <img src="undefined">
+                                                 </div>
+                                                 <div>
+                                                     <p class="product-name">@item.Flower.Name</p>
+                                                     <p>
+                                                         <span class="product-count">
+                                                             @item.Count
+                                                         </span>
+                                                         X
+                                                         <span class="product-price">
+                                                             @if (item.Flower.CampaignId == null)
+                                                             {
+                                                                 @item.Flower.Price
+                                                             }
+                                                                else
+                                                                {
+                                                                 @(item.Flower.Price * (100 - item.Flower.Campaign.DiscountPercentage)/100);
 
-                                    </div>
+                                                             }
+                                                         </span>
+                                                     </p>
+                                                 </div>
+                                                 <div>
+                                                     <div>
+                                                         <button class="btn-product-delete" data-id="@item.Flower.Id">x</button>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         }
+                                     </div>
 
                                         <div class="price-buttons">
                                             <div class="totalPrice">
@@ -151,7 +183,7 @@
                                                 </div>
                                                 <div class="priceText">
                                                     <span>$</span>
-                                                    <span>0</span>
+                                                    <span>@layoutService.ShowBasket().Result.TotalPrice</span>
                                                 </div>
                                             </div>
                                             <div class="viewCart-checkOut">
@@ -164,7 +196,7 @@
                                             </div>
                                         </div>
 
-                                </div> -->
+                                </div> 
 
                             </div>
 

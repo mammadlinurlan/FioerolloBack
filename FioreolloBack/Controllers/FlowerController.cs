@@ -1,5 +1,6 @@
 ﻿using FioreolloBack.DAL;
 using FioreolloBack.Models;
+using FioreolloBack.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -32,32 +33,79 @@ namespace FioreolloBack.Controllers
 
 
 
-        public IActionResult SetBasket(int id)
+        public async Task<IActionResult> SetBasket(int id)
         {
             Flower flower = _context.Flowers.FirstOrDefault(f => f.Id == id);
 
-            List<Flower> flowers;
-
-           string basket = HttpContext.Request.Cookies["Basket"];
-
-            if (basket == null)
+            if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
             {
-                flowers = new List<Flower>();
-
-                flowers.Add(flower);
-
+                AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+                BasketItem basketItem = _context.BasketItems.FirstOrDefault(i => i.FlowerId == flower.Id && i.AppUserId == user.Id);
+                if (basketItem==null)
+                {
+                    basketItem = new BasketItem
+                    {
+                        FlowerId = flower.Id,
+                        AppUserId = user.Id,
+                        Count = 1
+                    };
+                    _context.BasketItems.Add(basketItem);
+                }
+                else
+                {
+                    basketItem.Count++;
+                }
+                _context.SaveChanges();
             }
             else
             {
-                flowers = JsonConvert.DeserializeObject<List<Flower>>(basket);
-                flowers.Add(flower);
+                string basket = HttpContext.Request.Cookies["Basket"];
+
+                if (basket == null)
+                {
+
+                    List<BasketCookieItemVM> basketCookieItems = new List<BasketCookieItemVM>();
+                    basketCookieItems.Add(new BasketCookieItemVM
+                    {
+                        Count = 1,
+                        Id = flower.Id
+                    });
+
+                    string basketStr = JsonConvert.SerializeObject(basketCookieItems);
+                    HttpContext.Response.Cookies.Append("Basket", basketStr);
+                }
+                else
+                {
+                    List<BasketCookieItemVM> basketCookieItems = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(basket);
+                    BasketCookieItemVM cookieItem = basketCookieItems.FirstOrDefault(c => c.Id == flower.Id);
+                    if (cookieItem == null)
+                    {
+                        cookieItem = new BasketCookieItemVM
+                        {
+                            Id = flower.Id,
+                            Count = 1
+                        };
+                        basketCookieItems.Add(cookieItem);
+                    }
+                    else
+                    {
+                        cookieItem.Count++;
+
+                    }
+                    string basketStr = JsonConvert.SerializeObject(basketCookieItems);
+                    HttpContext.Response.Cookies.Append("Basket", basketStr);
+                }
             }
 
 
+           
+
+          
 
 
-            string basketStr = JsonConvert.SerializeObject(flowers);
-            HttpContext.Response.Cookies.Append("Basket", basketStr);
+
+
+        
 
 
 
@@ -68,10 +116,13 @@ namespace FioreolloBack.Controllers
         public IActionResult ShowBasket()
         {
             string strBasket = HttpContext.Request.Cookies["Basket"];
+            if (!string.IsNullOrEmpty(strBasket))
+            {
+                List<BasketCookieItemVM> basket = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(strBasket);
+                return Json(basket);
+            };
 
-            List<Flower> flowers = JsonConvert.DeserializeObject<List<Flower>>(strBasket);
-
-            return Json(flowers);
+            return Content("basket is empty") ;
         }
 
 

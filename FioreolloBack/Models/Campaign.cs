@@ -9,7 +9,7 @@ namespace FioreolloBack.Models
     {
         public int Id { get; set; }
 
-        public int? DiscountPercentage { get; set; }
+        public int DiscountPercentage { get; set; }
 
         public List<Flower> Flowers { get; set; }
     }
